@@ -1,8 +1,9 @@
-function initMap() {
+function initMap()
+{
   // Create a map object and specify the DOM element for display.
-  var map = new google.maps.Map(document.getElementById('map'), {
-    center: {lat: -34.397, lng: 150.644},
+  map = new google.maps.Map(document.getElementById('map'), {
+    center: {lat: 39, lng: -112},
     scrollwheel: false,
-    zoom: 8
+    zoom: 6
   });
 }
