@@ -1,27 +1,3 @@
-function getElement(){
-	var e = document.getElementById("elements");
-	AirDataPoint.measType=e.options[e.selectedIndex].value;
-	$('#elementName').html(AirDataPoint.measType);
-}
-
-window.onload=function(){
-		YUI().use('calendar', function (Y) {
-
-		  // Create a new instance of Calendar, setting its width
-		  // and height, allowing the dates from the previous
-		  // and next month to be visible and setting the initial
-		  // date to be November, 1982.
-		  var calendar = new Y.Calendar({
-		          contentBox: "#mycalendar",
-		          height:'200px',
-		          width:'400px',
-		          showPrevMonth: true,
-		          showNextMonth: true,
-		          date: new Date(2013,1,1)}).render();
-
-		});
-}
-
 function notifyMapChanged()
 {
 	document.getElementById("update").click();
@@ -51,16 +27,16 @@ function initMap()
     scrollwheel: false,
     zoom: 6
   });
-  
+
   var map2 = new google.maps.Map(document.getElementById('map2'), {
     center: {lat: 39, lng: -112},
     scrollwheel: false,
     zoom: 6
   });
-  
+
   var button = document.getElementById("update");
   var MAX_SIZE = 60000;
-  
+
   function getNormalizeFactor(dataPts)
   {
 	  var maxSize = 0;
@@ -72,7 +48,7 @@ function initMap()
 	  }
 	  return MAX_SIZE / maxSize;
   }
-  
+
   var maxNumCircles = 100;
   circles = []; // An array of 100 circles to be used at will.
   for(var i = 0; i < maxNumCircles; i++)
@@ -104,7 +80,7 @@ function initMap()
 	});
 	circles2[i] = cityCircle;
   }
-  
+
   function updateMap()
   {
 	  factor = getNormalizeFactor(allDataPoints);
@@ -123,7 +99,7 @@ function initMap()
 		  circles2[i].setMap(map2);
 	  }
   }
-  
+
   function clearCircles()
   {
 	  for(var i = 0; i < circles.length; i++)
@@ -135,7 +111,7 @@ function initMap()
 		  circles2[i].setMap(null);
 	  }
   }
-  
+
   function getSpecifiedOptions(radius, location)
   {
 	  var result = {
@@ -151,7 +127,7 @@ function initMap()
 	  result.center = location;
 	  return result;
   }
-  
+
   google.maps.event.addDomListener(button, 'click', updateMap);
   notifyMapChanged();
 }
