@@ -21,13 +21,12 @@ function update()
 var AirQualityMap = function()
 {
 	this.allDataPoints = [];
-	//var updateButton = 
 }
 
 function initMap()
 {
   // Create a map object and specify the DOM element for display.
-  var map = new google.maps.Map(document.getElementById('map'), {
+  var map = new google.maps.Map(document.getElementById('map1'), {
     center: {lat: 39, lng: -112},
     scrollwheel: false,
     zoom: 6
