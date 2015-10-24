@@ -15,7 +15,7 @@ window.onload=function(){
 		  var calendar = new Y.Calendar({
 		          contentBox: "#mycalendar",
 		          height:'200px',
-		          width:'600px',
+		          width:'400px',
 		          showPrevMonth: true,
 		          showNextMonth: true,
 		          date: new Date(2013,1,1)}).render();
