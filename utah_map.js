@@ -1,3 +1,8 @@
+function notifyMapChanged()
+{
+	document.getElementById("update").click();
+}
+
 var AirDataPoint = function(date, magnitude, measType, location)
 {
 	this.date = date;
@@ -7,7 +12,7 @@ var AirDataPoint = function(date, magnitude, measType, location)
 }
 
 var dataPoint = new AirDataPoint(new Date(2015, 10, 23), 100, "test", {lat:39, lng:-112});
-var allDataPoints = [dataPoint];
+var allDataPoints = [dataPoint, new AirDataPoint(new Date(2015, 10, 23), 100, "test", {lat:39, lng:-111})];
 
 function update()
 {
@@ -16,7 +21,7 @@ function update()
 function initMap()
 {
   // Create a map object and specify the DOM element for display.
-  var map = new google.maps.Map(document.getElementById('map'), {
+  map = new google.maps.Map(document.getElementById('map'), {
     center: {lat: 39, lng: -112},
     scrollwheel: false,
     zoom: 6
@@ -28,22 +33,26 @@ function initMap()
   function getNormalizeFactor()
   {
 	  var maxSize = 0;
-	  for(dataPt in allDataPoints)
+	  for(var i = 0; i < allDataPoints.length; i++)
+	  {
+		  var dataPt = allDataPoints[i];
 		  if (dataPt.magnitude > maxSize)
 			  maxSize = dataPt.magnitude;
-	  return MAX_SIZE * maxSize;
+	  }
+	  return MAX_SIZE / maxSize;
   }
   
-  var circles = []; // An array of 100 circles to be used at will.
-  for(i = 0; i < 100; i++)
+  var maxNumCircles = 100;
+  circles = []; // An array of 100 circles to be used at will.
+  for(var i = 0; i < maxNumCircles; i++)
   {
-	  cityCircle = new google.maps.Circle({
+	  var cityCircle = new google.maps.Circle({
 	  strokeColor: '#FF0000',
 	  strokeOpacity: 0.8,
 	  strokeWeight: 2,
 	  fillColor: '#FF0000',
 	  fillOpacity: 0.35,
-	  map: null,
+	  map: map,
 	  center: {lat: 39, lng: -112},
 	  radius: 60000
 	});
@@ -55,9 +64,9 @@ function initMap()
 	  factor = getNormalizeFactor();
 	  clearCircles();
 	  var i = 0;
-	  for(pt in allDataPoints)
+	  for(var i2 = 0; i2 < allDataPoints.length; i2++)
 	  {
-		  options = getSpecifiedOptions(pt.magnitude * factor, pt.location);
+		  options = getSpecifiedOptions(allDataPoints[i2].magnitude * factor, allDataPoints[i2].location);
 		  circles[i].setOptions(options)
 		  circles[i].setMap(map);
 		  i++;
@@ -66,15 +75,15 @@ function initMap()
   
   function clearCircles()
   {
-	  for(circle in circles)
+	  for(var i = 0; i < 100; i++)
 	  {
-		  circle.setMap(null);
+		  circles[i].setMap(null);
 	  }
   }
   
   function getSpecifiedOptions(radius, location)
   {
-	  return {
+	  var result = {
 		  strokeColor: '#FF0000',
 		  strokeOpacity: 0.8,
 		  strokeWeight: 2,
@@ -84,13 +93,10 @@ function initMap()
 		  center: location,
 		  radius: radius
 	  };
+	  result.center = location;
+	  return result;
   }
   
   google.maps.event.addDomListener(button, 'click', updateMap);
-  updateMap();
-}
-
-function notifyMapChanged()
-{
-	document.getElementById("update").click();
+  notifyMapChanged();
 }
