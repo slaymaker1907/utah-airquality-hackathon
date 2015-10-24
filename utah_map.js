@@ -44,6 +44,7 @@ function initMap()
 		  options = getSpecifiedOptions(pt.magnitude * factor, pt.location);
 		  circles[i].setOptions(options)
 		  circles[i].setMap(map);
+		  i++;
 	  }
   }
   
