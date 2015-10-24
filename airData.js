@@ -18,7 +18,7 @@ window.onload=function(){
 		          width:'600px',
 		          showPrevMonth: true,
 		          showNextMonth: true,
-		          date: new Date(1982,11,1)}).render();
+		          date: new Date(2013,1,1)}).render();
 
 		});
 }
