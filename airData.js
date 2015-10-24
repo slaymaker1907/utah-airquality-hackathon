@@ -19,7 +19,7 @@ window.onload=function(){
 		          showPrevMonth: true,
 		          showNextMonth: true,
 		          date: new Date(2013,1,1)}).render();
-
+		  	
 		});
 
 		  // Get a reference to Y.DataType.Date
