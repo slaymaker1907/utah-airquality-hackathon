@@ -75,7 +75,7 @@ function initMap()
   
   function clearCircles()
   {
-	  for(var i = 0; i < 100; i++)
+	  for(var i = 0; i < circles.length; i++)
 	  {
 		  circles[i].setMap(null);
 	  }
