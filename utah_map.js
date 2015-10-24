@@ -26,7 +26,13 @@ var AirQualityMap = function()
 function initMap()
 {
   // Create a map object and specify the DOM element for display.
-  var map = new google.maps.Map(document.getElementById('map1'), {
+  var map1 = new google.maps.Map(document.getElementById('map1'), {
+    center: {lat: 39, lng: -112},
+    scrollwheel: false,
+    zoom: 6
+  });
+  
+  var map2 = new google.maps.Map(document.getElementById('map2'), {
     center: {lat: 39, lng: -112},
     scrollwheel: false,
     zoom: 6
@@ -57,7 +63,7 @@ function initMap()
 	  strokeWeight: 2,
 	  fillColor: '#FF0000',
 	  fillOpacity: 0.35,
-	  map: map,
+	  map: map1,
 	  center: {lat: 39, lng: -112},
 	  radius: 60000
 	});
@@ -73,7 +79,7 @@ function initMap()
 	  {
 		  options = getSpecifiedOptions(allDataPoints[i2].magnitude * factor, allDataPoints[i2].location);
 		  circles[i].setOptions(options)
-		  circles[i].setMap(map);
+		  circles[i].setMap(map1);
 		  i++;
 	  }
   }
