@@ -21,6 +21,22 @@ window.onload=function(){
 		          date: new Date(2013,1,1)}).render();
 
 		});
+
+		  // Get a reference to Y.DataType.Date
+    var dtdate = Y.DataType.Date;
+
+    // Listen to calendar's selectionChange event.
+    calendar.on("selectionChange", function (ev) {
+    	// Get the date from the list of selected
+      // dates returned with the event (since only
+      // single selection is enabled by default,
+      // we expect there to be only one date)
+      var newDate = ev.newSelection[0];
+
+      // Format the date and output it to a DOM
+      // element.
+      Y.one("#selecteddate").setHTML(dtdate.format(newDate));
+    });
 }
 
 function getElement(){
