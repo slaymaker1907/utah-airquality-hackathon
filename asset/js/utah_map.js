@@ -34,22 +34,6 @@ function initMap()
 	  return MAX_SIZE * maxSize;
   }
   
-  var circles = []; // An array of 100 circles to be used at will.
-  for(i = 0; i < 100; i++)
-  {
-	  cityCircle = new google.maps.Circle({
-	  strokeColor: '#FF0000',
-	  strokeOpacity: 0.8,
-	  strokeWeight: 2,
-	  fillColor: '#FF0000',
-	  fillOpacity: 0.35,
-	  map: null,
-	  center: {lat: 39, lng: -112},
-	  radius: 60000
-	});
-	circles[i] = cityCircle;
-  }
-  
   function updateMap()
   {
 	  factor = getNormalizeFactor();
@@ -60,7 +44,6 @@ function initMap()
 		  options = getSpecifiedOptions(pt.magnitude * factor, pt.location);
 		  circles[i].setOptions(options)
 		  circles[i].setMap(map);
-		  i++;
 	  }
   }
   
@@ -84,6 +67,22 @@ function initMap()
 		  center: location,
 		  radius: radius
 	  };
+  }
+  
+  var circles = []; // An array of 100 circles to be used at will.
+  for(i = 0; i < 100; i++)
+  {
+	  cityCircle = new google.maps.Circle({
+	  strokeColor: '#FF0000',
+	  strokeOpacity: 0.8,
+	  strokeWeight: 2,
+	  fillColor: '#FF0000',
+	  fillOpacity: 0.35,
+	  map: null,
+	  center: {lat: 39, lng: -112},
+	  radius: 60000
+	});
+	circles.push(cityCircle);
   }
   
   google.maps.event.addDomListener(button, 'click', updateMap);
