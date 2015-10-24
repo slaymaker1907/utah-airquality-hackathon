@@ -12,16 +12,22 @@ var AirDataPoint = function(date, magnitude, measType, location)
 }
 
 var dataPoint = new AirDataPoint(new Date(2015, 10, 23), 100, "test", {lat:39, lng:-112});
-var allDataPoints = [dataPoint, new AirDataPoint(new Date(2015, 10, 23), 100, "test", {lat:39, lng:-111})];
+var allDataPoints = [dataPoint, new AirDataPoint(new Date(2015, 10, 23), 50, "test", {lat:39, lng:-111}), new AirDataPoint(new Date(2015, 10, 23), 100, "test", {lat:39, lng:-110})];
 
 function update()
 {
 }
 
+var AirQualityMap = function()
+{
+	this.allDataPoints = [];
+	//var updateButton = 
+}
+
 function initMap()
 {
   // Create a map object and specify the DOM element for display.
-  map = new google.maps.Map(document.getElementById('map'), {
+  var map = new google.maps.Map(document.getElementById('map'), {
     center: {lat: 39, lng: -112},
     scrollwheel: false,
     zoom: 6
